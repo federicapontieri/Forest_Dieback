@@ -28,7 +28,7 @@ ee.Initialize(project='ee-xxxxxxx') # This must be replaced with your GEE projec
 # Load the pre-defined bounding box asset for the Gargano Promontory
 aoi = ee.FeatureCollection('projects/ee-xxxxxxx/assets/roi') # This asset must be uploaded in your GEE projects; replace it with your directory
 
-# --- 4. DATASET LOADING AND FILTERING ---
+# 4. DATASET LOADING AND FILTERING
 # Load MOD16A2 Version 6.1 (8-Day Evapotranspiration composite)
 # Filter by the period and select the core ET band
 collection = ee.ImageCollection('MODIS/061/MOD16A2') \
@@ -46,11 +46,11 @@ for i in range(image_list.size().getInfo()):
     # Extract the acquisition date to use in the output filename
     date = img.date().format('YYYY_MM_dd').getInfo()
 
-    # --- 6. PRE-PROCESSING ---
+    # 6. PRE-PROCESSING 
     # Apply the official MODIS scaling factor for ET (0.1) and clip to the AOI
     processed_img = img.multiply(0.1).clip(aoi)  
 
-    # --- 7. EXPORT TO GOOGLE DRIVE ---
+    # 7. EXPORT TO GOOGLE DRIVE
     # Configure the export task ensuring proper CRS (EPSG:32633 - UTM Zone 33N) 
     # and spatial resolution (500m) to match the project's analytical framework
     task = ee.batch.Export.image.toDrive(
@@ -60,7 +60,7 @@ for i in range(image_list.size().getInfo()):
         fileNamePrefix=f'ET_{date}_UTM33N',
         region=aoi.geometry(),
         scale=500,
-        crs='EPSG:32633',
+        crs='EPSG:32633', # Choose the CRS that best suits your study area
         maxPixels=1e13,
         fileFormat='GeoTIFF'
     )
