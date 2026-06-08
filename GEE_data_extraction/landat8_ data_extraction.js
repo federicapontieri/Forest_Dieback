@@ -4,6 +4,7 @@
  * PROJECT: Gargano Forest Dieback Monitoring
  * DESCRIPTION: Filters, cloud-masks, calibrates, scales, and exports 100m daily 
  * Landsat 8 mosaics. Generates a metadata CSV for sun elevation.
+ * This script can be run directly in the Google Earth Engine code editor
  * ==============================================================================
  * NOTE FOR USERS: Before running this script, please import your Region of Interest 
  * (ROI) vector/geometry and name the variable 'table'.
