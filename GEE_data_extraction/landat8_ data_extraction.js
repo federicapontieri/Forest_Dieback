@@ -17,7 +17,7 @@ var exportFolder = 'Landsat8_img_100m'; // This folder will appear in your Googl
 // 2. LOAD AND FILTER LANDSAT 8 COLLECTION (TIER 1, LEVEL 2)
 var dataset = ee.ImageCollection("LANDSAT/LC08/C02/T1_L2")
   .filterBounds(table) //your roi
-  .filterDate("2024-09-01", "2025-04-30")
+  .filterDate("2024-03-01", "2025-04-30")
   .filterMetadata("CLOUD_COVER", "LESS_THAN", 80)
   .map(function(img) {
     // Select core operational bands and preserve native metadata
